@@ -4,6 +4,7 @@ import User from '../components/User';
 import Page from '../components/Page';
 import { bindActionCreators } from 'redux';
 import * as pageActions from '../actions/PageActions';
+import * as userActions from '../actions/UserActions';
 
 
 
@@ -11,10 +12,23 @@ import * as pageActions from '../actions/PageActions';
 class App extends Component {
   render() {
     const { user, page } = this.props;
-    const { setYear } = this.props.pageActions;
-    return <div>
-      <User name={user.name[1]} surname={user.surname[1]} age={user.age[1]}/>
-      <Page photos={page.photos} year={page.year} setYear={setYear}/>
+    const { getPhotos } = this.props.pageActions;
+    const { handleLogin } = this.props.userActions
+
+    return <div className='row'>
+      <Page 
+      photos={page.photos} 
+      year={page.year} 
+      getPhotos={getPhotos} 
+      fetching={page.fetching}
+      />
+      <User 
+      name={user.name[1]} 
+      surname={user.surname[1]} 
+      age={user.age[1]}
+      handleLogin={handleLogin} 
+      error={user.error}
+      />
     </div>
   }
 }
@@ -28,7 +42,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    pageActions: bindActionCreators(pageActions, dispatch)
+    pageActions: bindActionCreators(pageActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch)
   }
 }
 
