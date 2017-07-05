@@ -7,7 +7,8 @@ export default class Page extends Component {
   render() {
     const { year, photos, fetching, error } = this.props
     const years = [2016,2015,2014,2013,2012,2011,2010]
-    
+    console.log('========= photos =========');
+    console.log(photos);  
     return <div className='ib page'>
       <p>
         { years.map((item,index) =>  
@@ -18,8 +19,8 @@ export default class Page extends Component {
       {
         fetching ? <p>Загрузка...</p> : photos.map((entry, index) =>
           <div key={index} className='photo'>
-            <p><img src={entry.src} /></p>
-            <p>{entry.likes.count} ❤</p>
+            <p><img className='image' src={entry.src} /></p>
+            <p className='likes'>{entry.likes.count} <span className='heart'>❤</span></p>
           </div>
         )
       }

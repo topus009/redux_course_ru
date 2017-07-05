@@ -1,14 +1,8 @@
-//import { SET_YEAR } from '../constants/Page'
 import {
   GET_PHOTOS_REQUEST, 
   GET_PHOTOS_SUCCESS, 
   GET_PHOTOS_FAIL
 } from '../constants/Page'
-
-// export function getPhotos(year) {   return (dispatch) => {     dispatch({
-//   type: GET_PHOTOS_REQUEST,       payload: year     })     setTimeout(() => {
-//       dispatch({         type: GET_PHOTOS_SUCCESS,         payload: [1, 2, 3,
-// 4, 5]       })     }, 1000)   } }
 
 let photosArr = []
 let cached = false
@@ -30,7 +24,9 @@ function getMorePhotos(offset, count, year, dispatch) {
       extended: 1, 
       count: count,
       offset: offset
-    }, (r) => { //eslint-disable-line no-undef
+    }, (r) => { 
+    console.log('======== R ==========');
+    console.log(r);  
       try {
         if (offset <= r.response[0] - count) {
           offset += 200;
@@ -38,6 +34,8 @@ function getMorePhotos(offset, count, year, dispatch) {
           getMorePhotos(offset, count, year, dispatch)
         } else {
           let photos = makeYearPhotos(photosArr, year)
+              console.log('======== R-photos ==============================================');
+              console.log(photos);  
           cached = true
           dispatch({type: GET_PHOTOS_SUCCESS, payload: photos})
         }
@@ -51,9 +49,11 @@ export function getPhotos(year) {
     dispatch({type: GET_PHOTOS_REQUEST, payload: year})
     if (cached) {
       let photos = makeYearPhotos(photosArr, year)
+            console.log('photosArr, year',photosArr, year);
+
       dispatch({type: GET_PHOTOS_SUCCESS, payload: photos})
     } else {
-      getMorePhotos(0, 200, year, dispatch)
+      getMorePhotos(0, 100, year, dispatch)
     }
   }
 }

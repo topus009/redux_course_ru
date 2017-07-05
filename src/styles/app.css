@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  background-color: lightgrey;
 }
 ol, ul {
   list-style: none;
@@ -57,17 +58,22 @@ h3 {
   margin: 10px;
   font: 14px sans-serif;
 }
-.ib {
-  display: inline-block;
-}
 .page {
   width: 65%;
+  padding: 10px;
 }
 .user {
   width: 20%;
-  vertical-align: top;
+  height: 50px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 45px;
+  font-size: 20px;
 }
-
 .btn {
   border: none;
   border-radius: 5px;
@@ -94,3 +100,19 @@ h3 {
   text-shadow: 2px 3px #6383a8;
   color: black;
 } 
+.photo {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 2px;
+}
+.likes {
+  text-align: center;
+}
+.heart {
+  color: red;
+}
+.image {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
